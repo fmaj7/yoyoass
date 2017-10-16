@@ -14,7 +14,8 @@ Resources:
     Properties:
       Handler: index.handler
       Runtime: python3.6
-      Role: !Ref LambdaFunctionReadRole
+      # Must use GetAtt instead of Ref to avoid circular dependency
+      Role: !GetAtt: FunctionReadRole.Arn
       Events:
         GetEvent:
           Type: Api
