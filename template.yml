@@ -9,14 +9,12 @@ Parameters:
     Description: CodeStar projectId used to associate new resources to team members
 
 Resources:
-  HelloWorld:
+  LambdaFunctionRead:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
       Runtime: python3.6
-      Role:
-        Fn::ImportValue:
-          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+      Role: !Ref LambdaFunctionReadRole
       Events:
         GetEvent:
           Type: Api
@@ -28,3 +26,24 @@ Resources:
           Properties:
             Path: /
             Method: post
+  
+  LambdaFunctionReadRole:
+    Type: AWS::IAM::Role
+    Properties: 
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement: 
+          - 
+            Effect: Allow
+            Principal: 
+              Service: 
+                - ec2.amazonaws.com
+            Action: 
+              - sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+        - arn:aws:iam::aws:policy/AmazonPollyReadOnlyAccess
+      Path: /
+      RoleName: 
+        Fn::ImportValue:
+          !Join ['-', [!Ref ProjectId, !Ref AWS::Region, lambda-exec-role-read]]
