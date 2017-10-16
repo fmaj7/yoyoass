@@ -44,6 +44,4 @@ Resources:
         - 'arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'
         - 'arn:aws:iam::aws:policy/AmazonPollyReadOnlyAccess'
       Path: /
-      RoleName: 
-        Fn::ImportValue:
-          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'lambda-exec-role-read']]
+      RoleName: !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'lambda-exec-role-read']]
