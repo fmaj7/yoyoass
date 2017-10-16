@@ -19,8 +19,6 @@ def handler(event, context):
         Text='Welcome to space needle!',
         VoiceId='Emma'
     )
-    print("polly response")
-    print(response)
 
     audio = None
     if "AudioStream" in response:
@@ -29,14 +27,16 @@ def handler(event, context):
 
     base64_audio = base64.b64encode(audio).decode('ascii')
 
+    response_body = json.dumps({
+        'audio': {
+            'data': base64_audio,
+            'format': 'mp3',
+            'encoding': 'base64'
+        }
+    })
+
     return {
         'statusCode': 200,
-        'body': {
-            "audio": {
-                "data": base64_audio,
-                "format": "mp3",
-                "encoding": "base64"
-            }
-        },
+        'body': response_body,
         'headers': {'Content-Type': 'application/json'}
     }
