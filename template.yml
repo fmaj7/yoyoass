@@ -9,7 +9,7 @@ Parameters:
     Description: CodeStar projectId used to associate new resources to team members
 
 Resources:
-  LambdaFunctionRead:
+  FunctionRead:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
@@ -27,7 +27,7 @@ Resources:
             Path: /
             Method: post
   
-  LambdaFunctionReadRole:
+  FunctionReadRole:
     Type: AWS::IAM::Role
     Properties: 
       AssumeRolePolicyDocument:
