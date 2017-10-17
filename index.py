@@ -5,11 +5,9 @@ from contextlib import closing
 import base64
 import logging
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
-
-CHUNK_SIZE = 1024
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 client = boto3.client('polly')
 
 
