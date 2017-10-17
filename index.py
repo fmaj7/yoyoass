@@ -17,8 +17,8 @@ def handler(event, context):
     logger.info('received api gateway event: %s', event)
 
     path = ''
-    if 'pathParameters' in event and 'proxy' in event['pathParameters']:
-        path = event['pathParameters']['proxy']
+    if 'pathParameters' in event and event['pathParameters'] is not None:
+        path = event['pathParameters'].get('proxy', '')
         logging.info('received request for %s', path)
 
 
