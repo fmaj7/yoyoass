@@ -14,12 +14,13 @@ client = boto3.client('polly')
 
 
 def handler(event, context):
+    logger.info('received api gateway event: %s', event)
 
     path = ''
-    if 'queryParameters' in event and 'proxy' in event['queryParameters']:
-        path = event['queryParameters']['proxy']
+    if 'pathParameters' in event and 'proxy' in event['pathParameters']:
+        path = event['pathParameters']['proxy']
+        logging.info('received request for %s', path)
 
-    logger.info('api gateway event: %s', event)
 
     # Convert text to speech
     text = 'Welcome to space needle!'
