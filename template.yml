@@ -22,6 +22,11 @@ Resources:
           Properties:
             Path: /
             Method: get
+        ReadStreamEvent:
+          Type: Api
+          Properties:
+            Path: /stream/
+            Method: get
         PostEvent:
           Type: Api
           Properties:
