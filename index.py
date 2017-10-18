@@ -37,7 +37,7 @@ def handler(event, context):
 
     headers = {}
     if 'stream' in path:
-        response_body = json.dumps(base64_audio)
+        response_body = base64_audio
         headers = {'Content-Type': 'audio/mpeg'}
     else:
         response_body = json.dumps({
@@ -52,5 +52,6 @@ def handler(event, context):
     return {
         'statusCode': 200,
         'body': response_body,
-        'headers': headers
+        'headers': headers,
+        'isBase64Encoded': True
     }
